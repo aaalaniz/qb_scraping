@@ -5,7 +5,7 @@ import re
 from qb_scraper.items import CfbQbItem
 
 class QbSpider(BaseSpider):
-    name = "qb_stats"
+    name = "cfb_qb_stats"
     allowed_domains = ["sports-reference.com"]
     start_urls = [
         "http://www.sports-reference.com/cfb/players/troy-aikman-1.html",

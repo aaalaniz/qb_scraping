@@ -5,7 +5,7 @@ import re
 from qb_scraper.items import QbItem
 
 class QbSpider(BaseSpider):
-    name = "pro-football-reference"
+    name = "nfl_qb_stats"
     allowed_domains = ["pro-football-reference.com"]
     start_urls = [
             "http://www.pro-football-reference.com/players/A/AdamTo00.htm",
