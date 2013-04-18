@@ -6,6 +6,10 @@
 # Packages
 *.egg
 *.egg-info
+.DS_Store
+.html
+.csv
+.xls
 dist
 build
 eggs

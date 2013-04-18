@@ -40,3 +40,12 @@ class QbItem(Item):
     comebacks = Field()
     gwds = Field()
     avg_value = Field()
+
+class QbSalaryItem(Item):
+    name = Field()
+    year = Field()
+    dr_round = Field()
+    dr_overall = Field()
+    contract_len = Field()
+    contract_total = Field()
+    avg_salary = Field()
