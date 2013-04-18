@@ -49,3 +49,16 @@ class QbSalaryItem(Item):
     contract_len = Field()
     contract_total = Field()
     avg_salary = Field()
+
+class CfbQbItem(Item):
+	name = Field()
+	cmpp = Field()
+	att = Field()
+	pct = Field()
+	yds = Field()
+	ya = Field()
+	aya = Field()
+	td = Field()
+	inter = Field()
+	rate = Field()
+	numyrs = Field()
