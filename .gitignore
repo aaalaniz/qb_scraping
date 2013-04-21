@@ -7,9 +7,8 @@
 *.egg
 *.egg-info
 .DS_Store
-.html
-.csv
-.xls
+*.html
+*.xls
 dist
 build
 eggs
