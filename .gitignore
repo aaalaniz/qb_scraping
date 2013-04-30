@@ -1,4 +1,7 @@
+.RData
+.Rhistory
 *.py[cod]
+*.png
 
 # C extensions
 *.so
