@@ -1,0 +1,96 @@
+
+<a id="Top"></a>
+NA's in Data Factors
+========================================================
+
+This shows the gaps in our data.  Some of the stats we gathered are much more incomplete than others, simply because the data is not publicly available.
+
+*[w/Draft](#Draft)  
+*[w/Combine](#Combine)  
+
+
+Our fundamental data set (NFL and College Stats...)
+========================================================
+
+```{r}
+# Plot the number of NAs in the dataset (excluding Draft and Combine stats) by factor
+# (NAs totaled in excel using formula like "=COUNTIF(A$2:A$241,"NA")" )
+stats = read.csv("F:/DataMining/project/data/qb_stats_NAs.csv", header=TRUE)
+nas <- as.data.frame(stats[242,1:47]) # grab column name and last row w/ total NAs
+nrow(stats)
+ncol(stats)
+print.table(nas)
+testStats <- stats[-nrow(stats),]
+testStats <- na.omit(testStats)
+nrow(testStats)
+```
+
+Plot
+
+```{r fig.width=20, fig.height=20}
+par(las=2) # make label text perpendicular to axis
+par(mar=c(7,11,5,3)) # increase y-axis margin.
+barplot(as.matrix(nas), main="NA's in Data Factors", horiz=TRUE, cex.names=.8, space=1, xlim=c(0,250))
+
+```
+
+
+
+<a id="Draft"></a>
+Our Data set after being merged with draft data...
+========================================================
+[Top](#Top)  
+
+```{r}
+# Plot the number of NAs in the dataset (including Draft stats) by factor
+draftStats = read.csv("F:/DataMining/project/data/qb_stats_w_draft_NAs.csv", header=TRUE)
+nas <- as.data.frame(draftStats[214,1:54]) # grab column name and last row w/ total NAs
+nrow(draftStats)
+ncol(draftStats)
+print.table(nas)
+testStats <- draftStats[-nrow(draftStats),]
+testStats <- na.omit(testStats)
+nrow(testStats)
+```
+
+Plot
+
+```{r fig.width=20, fig.height=20}
+par(las=2) # make label text perpendicular to axis
+par(mar=c(7,11,5,3)) # increase y-axis margin.
+barplot(as.matrix(nas), main="NA's in Data Factors w/ draft", horiz=TRUE, cex.names=.8, space=1, xlim=c(0,200))
+
+```
+
+
+
+<a id="Combine"></a>
+Our Data set after being merged with combine data...
+========================================================
+[Top](#Top)  
+
+```{r}
+# Plot the number of NAs in the dataset (including Combine stats) by factor
+cStats = read.csv("F:/DataMining/project/data/qb_stats_w_combine_NAs.csv", header=TRUE)
+nas <- as.data.frame(cStats[nrow(cStats),1:ncol(cStats)]) # grab column name and last row w/ total NAs
+nrow(cStats)
+ncol(cStats)
+print.table(nas)
+testStats <- cStats[-nrow(cStats),]
+testStats <- na.omit(testStats)
+nrow(testStats)
+```
+
+Plot
+
+```{r fig.width=20, fig.height=20}
+par(las=2) # make label text perpendicular to axis
+par(mar=c(7,11,5,3)) # increase y-axis margin.
+barplot(as.matrix(nas), main="NA's in Data Factors w/ combine", horiz=TRUE, cex.names=.8, space=1, xlim=c(0,100))
+
+```
+
+
+[Top](#Top)  
+
+

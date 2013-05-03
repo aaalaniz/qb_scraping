@@ -1,0 +1,82 @@
+
+<a id="Top"></a>
+Stats on Stats w/o Combine
+========================================================
+
+Basic Statistics on the Statistics of Quarterbacks that make up our dataset
+
+
+*[Histograms](#Histograms)  
+*[Density](#Density)  
+*[Boxplots](#Boxplots)  
+
+
+```{r}
+qbStats = read.csv("F:/DataMining/project/data/qb_stats.csv", header=TRUE)
+test<- apply(qbStats,2,na.omit)
+for(i in 3:length(test)) {
+  x <- as.data.frame(test[i])
+	y <- as.matrix(x[1])
+	z <- as.numeric(y)
+  print("-----------------------------------------------------------------" )
+  print("Quarterback Statistic: " )
+	print(colnames(x))
+	print(summary(z))
+	print("Standard Deviation: " )
+	print( sd(z))
+}
+
+```
+
+<a id="Histograms"></a>
+Histograms...
+========================================================
+[Top](#Top)  
+
+```{r fig.width=10, fig.height=10}
+for(i in 3:length(test)) {
+  x <- as.data.frame(test[i])
+  y <- as.matrix(x[1])
+	data <- as.numeric(y)
+  print(colnames(x), quote=FALSE)
+  hist(data,main=colnames(x))
+}
+
+```
+
+<a id="Density"></a>
+Density...
+========================================================
+[Top](#Top)  
+
+```{r }
+for(i in 3:length(test)) {
+  x <- as.data.frame(test[i])
+  y <- as.matrix(x[1])
+  data <- as.numeric(y)
+  print(colnames(x), quote=FALSE)
+  plot(density(data),main=colnames(x))
+}
+
+```
+
+
+<a id="Boxplots"></a>
+Boxplots...
+========================================================
+[Top](#Top)  
+
+```{r }
+for(i in 3:length(test)) {
+  x <- as.data.frame(test[i])
+  y <- as.matrix(x[1])
+  data <- as.numeric(y)
+  print(colnames(x), quote=FALSE)
+  boxplot(data,main=colnames(x))
+}
+
+```
+
+
+[Top](#Top)  
+
