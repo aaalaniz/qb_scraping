@@ -1,0 +1,315 @@
+
+<a id="Top"></a>
+PCA - of the college stats data set as a whole and by decade
+========================================================
+
+
+*[SD/Decade](#SDdec)  
+*[Loadings/Decade](#LOADdec)  
+*[Each/Decade](#EACHdec)  
+
+
+Principal Component Analysis as a whole
+
+```{r}
+qbStats = read.csv("F:/DataMining/project/data/qbStatsSubset.csv", header=TRUE)
+test<- apply(qbStats,2,na.omit)
+options(width=10000) 
+# remove wins and touchdowns from this data set, b/c they are not predictors
+qbStats = qbStats[,-4]
+qbStats = qbStats[,-4]
+
+qbStats = na.omit(qbStats)
+b = scale(qbStats)
+pcaP = princomp(b)
+summary(pcaP)
+abs(pcaP$loadings[,1:4])
+
+```
+
+Plots of PCA variances, scores, loadings and SD
+
+```{r}
+plot(pcaP)
+plot(pcaP$scores, col = c("red", "blue"), pch = 19)
+plot(pcaP$loadings, col = c("red", "blue"), pch = 19)
+plot(pcaP$sdev)
+
+```
+
+
+
+```{r}
+tens <- test[0:0]
+zeros <- tens
+nineties <- tens
+eighties <- tens
+seventies <- tens
+sixties <- tens
+fifties <- tens
+forties <- tens
+thirties <- tens
+
+for(i in 1:nrow(qbStats)) {
+
+  if(((qbStats$year[i])<=2014) && ((qbStats$year[i])>2009)) {
+    tens <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=2009) && ((qbStats$year[i])>1999)) {
+    zeros <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1999) && ((qbStats$year[i])>1989)) {
+    nineties <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1989) && ((qbStats$year[i])>1979)) {
+    eighties <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1979) && ((qbStats$year[i])>1969)) {
+    seventies <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1969) && ((qbStats$year[i])>1959)) {
+    sixties <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1959) && ((qbStats$year[i])>1949)) {
+    fifties <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1949) && ((qbStats$year[i])>1939)) {
+    forties <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+  else if(((qbStats$year[i])<=1939) && ((qbStats$year[i])>1929)) {
+    thirties <- rbind(as.data.frame(tens),as.data.frame(qbStats[i,]))
+  }
+
+}
+# remove years, since we are comparing against decade
+forties <- forties[,-5]
+fifties <- fifties[,-5]
+sixties <- sixties[,-5]
+seventies <- seventies[,-5]
+eighties <- eighties[,-5]
+nineties <- nineties[,-5]
+zeros <- zeros[,-5]
+tens <- tens[,-5]
+
+b = scale(tens)
+pca10 = princomp(b)
+summary(pca10)
+abs(pca10$loadings[,1:4])
+
+b = scale(zeros)
+pca0 = princomp(b)
+summary(pca0)
+abs(pca0$loadings[,1:4])
+
+b = scale(nineties)
+pca9 = princomp(b)
+summary(pca9)
+abs(pca9$loadings[,1:4])
+
+b = scale(eighties)
+pca8 = princomp(b)
+summary(pca8)
+abs(pca8$loadings[,1:4])
+
+b = scale(seventies)
+pca7 = princomp(b)
+summary(pca7)
+abs(pca7$loadings[,1:4])
+
+b = scale(sixties)
+pca6 = princomp(b)
+summary(pca6)
+abs(pca6$loadings[,1:4])
+
+b = scale(fifties)
+pca5 = princomp(b)
+summary(pca5)
+abs(pca5$loadings[,1:4])
+
+b = scale(forties)
+pca4 = princomp(b)
+summary(pca4)
+abs(pca4$loadings[,1:4])
+
+# c1a is component 1 for all the decades.
+# the columns are the decades (1930's - 2010's)
+# the rows are the features (age - c_avg_yds)
+c1a <- matrix(nrow=10, ncol=8)
+c2a <- matrix(nrow=10, ncol=8)
+c3a <- matrix(nrow=10, ncol=8)
+c4a <- matrix(nrow=10, ncol=8)
+
+for(j in 1:10) {
+  c1a[j,1] <- abs(pca4$loadings[j])
+  c2a[j,2] <- abs(pca4$loadings[j+10])
+  c3a[j,3] <- abs(pca4$loadings[j+20])
+  c4a[j,4] <- abs(pca4$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,2] <- abs(pca5$loadings[j])
+  c2a[j,3] <- abs(pca5$loadings[j+10])
+  c3a[j,4] <- abs(pca5$loadings[j+20])
+  c4a[j,5] <- abs(pca5$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,3] <- abs(pca6$loadings[j])
+  c2a[j,4] <- abs(pca6$loadings[j+10])
+  c3a[j,5] <- abs(pca6$loadings[j+20])
+  c4a[j,6] <- abs(pca6$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,4] <- abs(pca7$loadings[j])
+  c2a[j,5] <- abs(pca7$loadings[j+10])
+  c3a[j,6] <- abs(pca7$loadings[j+20])
+  c4a[j,7] <- abs(pca7$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,5] <- abs(pca8$loadings[j])
+  c2a[j,6] <- abs(pca8$loadings[j+10])
+  c3a[j,7] <- abs(pca8$loadings[j+20])
+  c4a[j,8] <- abs(pca8$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,6] <- abs(pca9$loadings[j])
+  c2a[j,7] <- abs(pca9$loadings[j+10])
+  c3a[j,8] <- abs(pca9$loadings[j+20])
+  c4a[j,1] <- abs(pca9$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,7] <- abs(pca0$loadings[j])
+  c2a[j,8] <- abs(pca0$loadings[j+10])
+  c3a[j,1] <- abs(pca0$loadings[j+20])
+  c4a[j,2] <- abs(pca0$loadings[j+30])
+}
+for(j in 1:10) {
+  c1a[j,8] <- abs(pca10$loadings[j])
+  c2a[j,1] <- abs(pca10$loadings[j+10])
+  c3a[j,2] <- abs(pca10$loadings[j+20])
+  c4a[j,3] <- abs(pca10$loadings[j+30])
+}
+
+factorNames <- colnames(sixties)
+
+# std deviations of components
+sda <- matrix(nrow=10, ncol=8)
+
+for(j in 1:10) {
+  sda[j,1] <- pca4$sdev[j]
+  sda[j,2] <- pca5$sdev[j]
+  sda[j,3] <- pca6$sdev[j]
+  sda[j,4] <- pca7$sdev[j]
+  sda[j,5] <- pca8$sdev[j]
+  sda[j,6] <- pca9$sdev[j]
+  sda[j,7] <- pca0$sdev[j]
+  sda[j,8] <- pca10$sdev[j]
+}
+print(sda)
+print(summary(pca4))
+print(summary(pca5))
+print(summary(pca6))
+print(summary(pca10))
+```
+
+```{r}
+```
+
+<a id="SDdec"></a>
+Plots of the Standard Deviations of the first 4 PCs over the decades...
+========================================================
+[Top](#Top)  
+
+
+```{r}
+```
+
+```{r}
+components <- c("PC1", "PC2", "PC3", "PC4")
+for(h in 1:4){
+  plot(sda[h,], type="o", main=components[h], sub="Standard Deviations over decades", xlab="decades (1=1930's, 8=2010's)",ylab="Std Deviation", col="blue")
+}
+
+
+```
+
+```{r}
+```
+
+
+<a id="LOADdec"></a>
+Plots of the loadings of the first 4 PCs over the decades...
+========================================================
+[Top](#Top)  
+
+
+
+```{r}
+```
+
+```{r}
+for(h in 1:10){
+  plot(c1a[h,], type="o", main=" PC1 ", sub="loading over decades", xlab="decades (1=1930's, 8=2010's)",ylab=factorNames[h], col="blue")
+}
+for(h in 1:10){
+  plot(c2a[h,], type="o", main=" PC2 ", sub="loading over decades", xlab="decades (1=1930's, 8=2010's)",ylab=factorNames[h], col="blue")
+}
+for(h in 1:10){
+  plot(c3a[h,], type="o", main=" PC3 ", sub="loading over decades", xlab="decades (1=1930's, 8=2010's)",ylab=factorNames[h], col="blue")
+}
+for(h in 1:10){
+  plot(c4a[h,], type="o", main=" PC4 ", sub="loading over decades", xlab="decades (1=1930's, 8=2010's)",ylab=factorNames[h], col="blue")
+}
+
+```
+
+```{r}
+```
+
+
+<a id="EACHdec"></a>
+Plots of PCA, scores and loading for each decade...
+========================================================
+[Top](#Top)  
+
+
+```{r}
+```
+
+```{r fig.width=10, fig.height=10}
+plot(pca10)
+plot(pca10$scores, col = c("red", "blue"), pch = 19)
+plot(pca10$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca0)
+plot(pca0$scores, col = c("red", "blue"), pch = 19)
+plot(pca0$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca9)
+plot(pca9$scores, col = c("red", "blue"), pch = 19)
+plot(pca9$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca8)
+plot(pca8$scores, col = c("red", "blue"), pch = 19)
+plot(pca8$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca7)
+plot(pca7$scores, col = c("red", "blue"), pch = 19)
+plot(pca7$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca6)
+plot(pca6$scores, col = c("red", "blue"), pch = 19)
+plot(pca6$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca5)
+plot(pca5$scores, col = c("red", "blue"), pch = 19)
+plot(pca5$loadings, col = c("red", "blue"), pch = 19)
+
+plot(pca4)
+plot(pca4$scores, col = c("red", "blue"), pch = 19)
+plot(pca4$loadings, col = c("red", "blue"), pch = 19)
+
+
+
+```
+
+
+[Top](#Top)  
