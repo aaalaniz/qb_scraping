@@ -9,3 +9,12 @@ Documentation
 For further analysis click the link below
 
 http://bit.ly/17PEBg3
+
+Authors
+=====================
+
+Aaron
+
+Inaqui
+
+Greg
