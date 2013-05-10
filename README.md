@@ -1,16 +1,11 @@
-QB Scraper
+QB Analysis
 ===========
 
-Python code that will scrape qb stats from http://www.sports-reference.com
+Data analysis on quarterbacks debut season in the nfl.
 
-Scraping Nfl Qb Stats
+Documentation
 =====================
 
-scrapy crawl nfl_qb_stats --set FEED_URI=nfl_qb_stat_output.csv --set FEED_FORMAT=csv
+For further analysis click the link below
 
-Scraping College Qb Stats
-=====================
-
-scrapy crawl cfb_qb_stats --set FEED_URI=cfb_qb_stat_output.csv --set FEED_FORMAT=csv
-
-
+http://bit.ly/17PEBg3
